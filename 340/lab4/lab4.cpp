@@ -7,44 +7,6 @@
 #include <stdlib.h>  
 using namespace std;
 template <typename T>
-class array{
-	private: 
-		int size;
-		T *arr;
-
-	public:
-			array(){
-				arr = new T[1];
-				*size = 0;
-		}
-
-		void push(T content){
-			int new_size = size + 1;
-			T *newarr  = new int[new_size];
-			for(int i = 0; i < size; i++){
-				newarr[i] = arr[i];
-			}
-			newarr[size] = content;
-			size = new_size;
-			delete[] arr;
-			arr = newarr;
-		}
-
-
-		//pop removes the last int in the array
-		void remove(int i){
-			int newsize = size - 1;
-			int * newarr  = new int[newsize];
-			for(int i = 0; i < newsize; i++){
-				newarr[i] = ptr[i];
-			}
-			size = newsize;
-			delete[] arr;
-			arr = newarr;
-			return content;
-		}
-};
-template <typename T>
 class queue{
 	private:
 		struct node {
@@ -77,7 +39,7 @@ class queue{
 
 		T pop(){
 			if(isempty){
-				return "";
+				exit (EXIT_FAILURE);		
 			}
 			T top = head->info;
 			node *oldHead = head;
@@ -91,10 +53,7 @@ class queue{
 			return isempty;
 		}
 
-
 };
-
-
 
 
 class team{
@@ -106,22 +65,65 @@ class team{
 
 	public:
 		string name;
-		team(int numOfStops){
+		team();
+		team(int numOfStops,string n){
 			for(int i = 0; i<numOfStops; i++){
 				int time = mins();
 				arrivalTimes.push(time);
 			}
+			name = n;
 		}
+		string getName(){
+			return name;
+		}
+		int getTime(){
+			return(arrivalTimes.pop());
+		}
+
 };
 
 class game{
 	private:
-		int numOfTeams = 0; 
+		int numberOfStops;
 		queue<string> stops;
-		array teams;
+		team *teams;
+		int numberOfTeams;
+		void addTeam(team teamname){
+			int new_size = numberOfTeams + 1;
+			team *newarr  = new team[new_size];
+			for(int i = 0; i < numberOfTeams; i++){
+				newarr[i] = teams[i];
+			}
+			newarr[numberOfTeams] = teamname;
+			numberOfTeams = new_size;
+			delete[] teams;
+			teams = newarr;
+		}
+		void removeTeam(team teamname){
+			int new_size = numberOfTeams - 1;
+			team *newarr = new team[new_size];
+			int skiped;
+			for (int i = 0; i < numberOfTeams; i++){
+				if (teams[i].getName() == teamname.getName()){
+					skiped = i;
+					break;
+				}
+			}
+			for(int i = 0; i < skiped; i++){
+				newarr[i] = teams[i];
+			}
+			for (int i = skiped; i< numberOfTeams; i++){
+				newarr[i] = teams[i];
+			}
+			delete[] teams;
+			teams = newarr;
+		}
+
 	public:
 		game(){
 			string filename;
+			numberOfTeams = 0;
+			numberOfStops = 0;
 			cout<<"Please enter the filename for the stops."<<endl;
 			cin>>filename;
 			cout<<"Thank you"<<endl;
@@ -132,6 +134,7 @@ class game{
 			while(inputFile){
 				getline(inputFile, line);
 				stops.push(line);
+				numberOfStops++;
 			}
 			cout<<"Please enter the filename for the teams."<<endl;
 			cin>>filename;
@@ -142,8 +145,8 @@ class game{
 			cin.ignore();
 			while(inputFile1){
 				getline(inputFile1, line);
-				teams.push(line);
-				numOfTeams++;
+				numberOfTeams++;
+				addTeam(team(numberOfStops, line));
 			}
 
 		}
@@ -152,11 +155,12 @@ class game{
 				string city = stops.pop();
 				string loser;
 				int time = 0;
-				for(int i =0; i<numOfTeams;i++){
-					team temp = teams.pop();
-					if(temp.arrivalTimes> time){
-						time = temp.arrivalTimes;
-						loser = temp.name;	
+				for(int i =0; i<numberOfTeams;i++){
+					team temp = teams[i];
+					int thisTime = temp.getTime();
+					if(thisTime > time){
+						time = thisTime;
+						loser = temp.getName();	
 					}
 				}
 
