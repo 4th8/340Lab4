@@ -171,4 +171,7 @@ class game{
 };
 
 int main(){
+game();
+
+
 }
