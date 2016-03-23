@@ -97,26 +97,29 @@ class list{
 class team{
 	private:
 		list<int> arrivalTimes;
-		int mins(){
-			return rand() % 1440 + 300;
-		}
-
+		int numStops;
 	public:
 		string name;
 		team(){};
-		team(int numOfStops,string n){
-			for(int i = 0; i<numOfStops; i++){
-				int time = mins();
-				arrivalTimes.push(time);
-			}
+		team(string n){
 			name = n;
+			numStops = 0;
+		}
+		void addTimes(int time){
+				arrivalTimes.add(time);
+				numStops++;
 		}
 		~team(){};
 		string getName(){
 			return name;
 		}
-		int getTime(){
-			return(arrivalTimes.pop());
+		int printTimes(){
+			cout<< name<< "     ";
+			for(int i = 0; i<numStops; i++){
+				int time = arrivalTimes.getElement(i);
+				cout<< "     " << time;
+			}
+			cout<<"\n";
 		}
 
 };
@@ -125,8 +128,8 @@ class game{
 	private:
 		int numberOfStops;
 		queue<string> stops;
-		queue<team> teamTracker;
-		list<team> teamList;
+		queue<team>* teamTracker;
+		list<team>* teamList;
 		int numberOfTeams;
 
 
@@ -134,7 +137,7 @@ class game{
 		void addTeam(team team){
 			teamList.add(team);
 		}
-		void removeTeam(team teamname){
+	/*	void removeTeam(team teamname){
 			int new_size = numberOfTeams - 1;
 			team *newarr = new team[new_size];
 			int skiped;
@@ -153,7 +156,14 @@ class game{
 			delete[] teams;
 			teams = newarr;
 		}
-
+	*/
+		void dequeue(){
+			teamTracker.pop();
+		}
+		
+		int getTime(){
+			return(rand() % 24 + 5);
+		}
 	public:
 		game(){
 			teamTracker = new queue<team>;
@@ -183,7 +193,7 @@ class game{
 			while(inputFile1){
 				getline(inputFile1, line);
 				cout<< line << endl;
-				team temp = team(numberOfStops, line);
+				team temp = team(line);
 				cout << temp.getName() << endl;
 				addTeam(temp);
 				numberOfTeams++;
@@ -196,8 +206,8 @@ class game{
 				string loser;
 				int time = 0;
 				for(int i =0; i<numberOfTeams;i++){
-					team temp = teams[i];
-					int thisTime = temp.getTime();
+					team temp = teamTracker.pop();
+					int thisTime = teamTracker.getElement(i).getTime();
 					if(thisTime > time){
 						time = thisTime;
 						loser = temp.getName();	
