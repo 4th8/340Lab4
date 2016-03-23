@@ -89,19 +89,34 @@ class game{
 	private:
 		int numberOfStops;
 		queue<string> stops;
-		team *teams = new team();
+		team *teams;
 		int numberOfTeams;
+
+
+
 		void addTeam(team teamname){
 			int new_size = numberOfTeams + 1;
+			cout<< "new_size is: " << new_size << endl;
 			team *newarr  = new team[new_size];
+			cout<<"This sucks"<<endl;
 			for(int i = 0; i < numberOfTeams; i++){
+				team x = teams[i];
+				cout<<"It is not teams."<<endl;
+				team y = newarr[i];
+				cout<<"it is not arr"<<endl;
 				newarr[i] = teams[i];
+				cout<<i<<endl;
 			}
+			cout << "out of for" << endl;
 			newarr[numberOfTeams] = teamname;
-			numberOfTeams = new_size;
-		//	delete teams;
-			cout<<"Add Team"<<endl;
+			cout << "added last spot" <<endl;
+			delete teams;
 			teams = newarr;
+			for(int j = 0; j < new_size; j++){
+				cout<<teams[j].getName()<<endl;
+			}
+			delete[] newarr;
+			cout<<"Add Team"<<endl;
 		}
 		void removeTeam(team teamname){
 			int new_size = numberOfTeams - 1;
@@ -125,6 +140,7 @@ class game{
 
 	public:
 		game(){
+			teams = new team[1];
 			string filename;
 			numberOfTeams = 0;
 			numberOfStops = 0;
@@ -149,9 +165,11 @@ class game{
 			cin.ignore();
 			while(inputFile1){
 				getline(inputFile1, line);
-				numberOfTeams++;
+				cout<< line << endl;
 				team temp = team(numberOfStops, line);
+				cout << temp.getName() << endl;
 				addTeam(temp);
+				numberOfTeams++;
 			}
 
 		}
