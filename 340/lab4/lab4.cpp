@@ -68,7 +68,7 @@ class queue{
 //};
 class team{
 	private:
-		queue<int> arrivalTimes;
+		list<int> arrivalTimes;
 		int mins(){
 			return rand() % 1440 + 300;
 		}
@@ -97,19 +97,14 @@ class game{
 	private:
 		int numberOfStops;
 		queue<string> stops;
-		team *teams;
+		queue<team> teamTracker;
+		list<team> teamList;
 		int numberOfTeams;
 
 
 
-		void addTeam(team teamname){
-			int new_size = numberOfTeams + 1;
-			team *newarr  = new team[new_size];
-			for(int i = 0; i < numberOfTeams; i++){
-				newarr[i] = teams[i];
-			}
-			newarr[numberOfTeams] = teamname;
-			teams = newarr;
+		void addTeam(team team){
+			teamList.add(team);
 		}
 		void removeTeam(team teamname){
 			int new_size = numberOfTeams - 1;
@@ -133,7 +128,8 @@ class game{
 
 	public:
 		game(){
-			teams = new team();
+			teamTracker = new queue<team>;
+			teamList = new list<team>; 
 			string filename;
 			numberOfTeams = 0;
 			numberOfStops = 0;
