@@ -55,7 +55,6 @@ class queue{
 		bool checkEmpty(){
 			return isempty;
 		}
-
 };
 template <typename T>
 class list{
@@ -91,6 +90,33 @@ class list{
 			tail->next = &temp;
 			tail = &tail;	
 		}
+		T getElement(int index){
+			int current = head->index;
+			listNode cur = *head;
+			while(current != index){
+				cur = *cur.next;
+				current = cur.index;
+			}
+			return cur.info;
+		}
+		void removeElement(int index){
+			int current = head->index;
+			listNode cur = *head;
+			while(current != index){
+				cur = *cur.next;
+				current = cur.index;
+			}
+			listNode *last = cur.prev;
+			listNode *n = cur.next;
+			last->next = cur.next;
+			n->prev = cur.prev;
+			delete cur;
+		}
+
+
+
+
+
 
 
 };
