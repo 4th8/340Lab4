@@ -88,7 +88,7 @@ class list{
 		       	temp.prev = tail;
 			temp.next = NULL;
 			tail->next = &temp;
-			tail = &tail;	
+		//	tail = &tail;	
 		}
 		T getElement(int index){
 			int current = head->index;
@@ -158,96 +158,69 @@ class game{
 		list<team>* teamList;
 		int numberOfTeams;
 
-
-
 		void addTeam(team team){
-			teamList.add(team);
+			teamList->add(team);
 		}
-	/*	void removeTeam(team teamname){
-			int new_size = numberOfTeams - 1;
-			team *newarr = new team[new_size];
-			int skiped;
-			for (int i = 0; i < numberOfTeams; i++){
-				if (teams[i].getName() == teamname.getName()){
-					skiped = i;
-					break;
-				}
-			}
-			for(int i = 0; i < skiped; i++){
-				newarr[i] = teams[i];
-			}
-			for (int i = skiped; i< numberOfTeams; i++){
-				newarr[i] = teams[i];
-			}
-			delete[] teams;
-			teams = newarr;
-		}
-	*/
 		void dequeue(){
-			teamTracker.pop();
+			teamTracker->pop();
 		}
 		
-		int getTime(){
+		int createTime(){
 			return(rand() % 24 + 5);
 		}
 	public:
 		game(){
 			teamTracker = new queue<team>;
-			teamList = new list<team>; 
-			string filename;
-			numberOfTeams = 0;
-			numberOfStops = 0;
-			cout<<"Please enter the filename for the stops."<<endl;
-			cin>>filename;
-			cout<<"Thank you"<<endl;
-			ifstream inputFile;
-			inputFile.open(filename.c_str(),ios::in);
-			cin.ignore();
+			teamList = new list<team>;	
+		}
+		void loadStops(ifstream &file){	
 			string line;
-			while(inputFile){
-				getline(inputFile, line);
+			while(file){
+				getline(file, line);
+				cout<< line << endl;
 				stops.push(line);
 				numberOfStops++;
 			}
-			cout<<"Please enter the filename for the teams."<<endl;
-			cin>>filename;
-			cout<<"Thank you"<<endl;
-			cout<<"I am done with you."<<endl;
-			ifstream inputFile1;
-			inputFile1.open(filename.c_str(),ios::in);
-			cin.ignore();
-			while(inputFile1){
-				getline(inputFile1, line);
+			cout<< "DONE ADDING STOPS" << endl;
+		}
+		void loadTeams(ifstream &file){
+			string line;
+			while(file){
+				getline(file, line);
 				cout<< line << endl;
 				team temp = team(line);
-				cout << temp.getName() << endl;
 				addTeam(temp);
 				numberOfTeams++;
 			}
-
+			cout << "DONE ADDING TEAMS" << endl;
 		}
 		void takeTurn(){
 			if(!stops.checkEmpty()){
 				string city = stops.pop();
 				string loser;
-				int time = 0;
-				for(int i =0; i<numberOfTeams;i++){
-					team temp = teamTracker.pop();
-					int thisTime = teamTracker.getElement(i).getTime();
-					if(thisTime > time){
-						time = thisTime;
-						loser = temp.getName();	
-					}
+				for(int i=0; i<numberOfStops; i++){
+					team temp = teamTracker->pop();
+					int time = createTime();
+					temp.addTimes(time);
+						
 				}
-
-
-
 			}
 		}
 };
 
 int main(){
-game();
-
+	string filename;
+	cout<<"Please enter the filename for the cities."<<endl;
+	cin>>filename;
+	ifstream inputCities;
+	inputCities.open(filename.c_str(),ios::in);
+	cout<<"Please enter the filename for the teams." <<endl;
+	cin>>filename;
+	ifstream inputTeams;
+	inputTeams.open(filename.c_str(),ios::in);
+	cin.ignore();
+	game* theGame = new game();
+	theGame->loadStops(inputCities);
+	theGame->loadTeams(inputTeams);
 
 }
