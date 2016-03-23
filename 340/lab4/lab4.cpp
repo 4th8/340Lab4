@@ -58,7 +58,14 @@ class queue{
 
 };
 
+//class list{
+//	private:
 
+
+//	public:
+
+
+//};
 class team{
 	private:
 		queue<int> arrivalTimes;
@@ -76,6 +83,7 @@ class team{
 			}
 			name = n;
 		}
+		~team(){};
 		string getName(){
 			return name;
 		}
@@ -96,27 +104,12 @@ class game{
 
 		void addTeam(team teamname){
 			int new_size = numberOfTeams + 1;
-			cout<< "new_size is: " << new_size << endl;
 			team *newarr  = new team[new_size];
-			cout<<"This sucks"<<endl;
 			for(int i = 0; i < numberOfTeams; i++){
-				team x = teams[i];
-				cout<<"It is not teams."<<endl;
-				team y = newarr[i];
-				cout<<"it is not arr"<<endl;
 				newarr[i] = teams[i];
-				cout<<i<<endl;
 			}
-			cout << "out of for" << endl;
 			newarr[numberOfTeams] = teamname;
-			cout << "added last spot" <<endl;
-			delete teams;
 			teams = newarr;
-			for(int j = 0; j < new_size; j++){
-				cout<<teams[j].getName()<<endl;
-			}
-			delete[] newarr;
-			cout<<"Add Team"<<endl;
 		}
 		void removeTeam(team teamname){
 			int new_size = numberOfTeams - 1;
@@ -140,7 +133,7 @@ class game{
 
 	public:
 		game(){
-			teams = new team[1];
+			teams = new team();
 			string filename;
 			numberOfTeams = 0;
 			numberOfStops = 0;
