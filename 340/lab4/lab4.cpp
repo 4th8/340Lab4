@@ -21,7 +21,10 @@ class queue{
 
 	public:
 		queue(){
-			head = NULL;
+			node h;
+			node t;
+			head = &h;
+			tail = &t;
 			isempty = true;
 		}
 
@@ -65,7 +68,7 @@ class team{
 
 	public:
 		string name;
-		team();
+		team(){};
 		team(int numOfStops,string n){
 			for(int i = 0; i<numOfStops; i++){
 				int time = mins();
@@ -86,7 +89,7 @@ class game{
 	private:
 		int numberOfStops;
 		queue<string> stops;
-		team *teams;
+		team *teams = new team();
 		int numberOfTeams;
 		void addTeam(team teamname){
 			int new_size = numberOfTeams + 1;
@@ -96,7 +99,8 @@ class game{
 			}
 			newarr[numberOfTeams] = teamname;
 			numberOfTeams = new_size;
-			delete[] teams;
+		//	delete teams;
+			cout<<"Add Team"<<endl;
 			teams = newarr;
 		}
 		void removeTeam(team teamname){
@@ -146,7 +150,8 @@ class game{
 			while(inputFile1){
 				getline(inputFile1, line);
 				numberOfTeams++;
-				addTeam(team(numberOfStops, line));
+				team temp = team(numberOfStops, line);
+				addTeam(temp);
 			}
 
 		}
