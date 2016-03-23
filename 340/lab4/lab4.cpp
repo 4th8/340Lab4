@@ -57,15 +57,43 @@ class queue{
 		}
 
 };
+template <typename T>
+class list{
+	private:
+		struct listNode{
+			int index;
+			T info;
+			listNode *prev;
+			listNode *next;
+		};
+		listNode *head;
+		listNode *tail;
 
-//class list{
-//	private:
+	public:
+		list(){
+			head = NULL;
+			tail = NULL;
+		}
+		list(T content){
+			listNode temp;
+			temp.info = content;
+			temp.index = 0;
+			temp.prev = NULL;
+			head = &temp;
+			tail = head;
+		}
+		void add(T content){
+			listNode temp;
+			temp.info = content;
+			temp.index = tail->index + 1;
+		       	temp.prev = tail;
+			temp.next = NULL;
+			tail->next = &temp;
+			tail = &tail;	
+		}
 
 
-//	public:
-
-
-//};
+};
 class team{
 	private:
 		list<int> arrivalTimes;
