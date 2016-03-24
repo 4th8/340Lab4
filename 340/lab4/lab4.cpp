@@ -91,10 +91,12 @@ class list{
 			cout<<"Here in add."<<endl;
 			temp->info = content;
 			temp->next = tail;
-
+			tail->prev= temp;
+			temp->prev = NULL;
 			tail = temp;
 			if(size == 0){
 				head = temp;
+				head->prev = tail;
 			}
 			size++;
 		}
@@ -196,7 +198,7 @@ class game{
 				getline(file, line);
 				if(line != ""){
 					team *ptr = new team(line);
-					teamList.add(ptr);
+					teamList->add(ptr);
 					numberOfTeams++;
 				}
 			}
