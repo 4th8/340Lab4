@@ -135,9 +135,7 @@ class team{
 				int time = arrivalTimes.getElement(i);
 			}
 		}
-		int getLastTime(int length){
-			
-
+		list<int> getLastTime(int length){
 			return arrivalTimes
 		}
 		int createTime(){
