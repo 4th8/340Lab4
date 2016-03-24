@@ -284,12 +284,12 @@ class game{
 			cout<<"Here in run."<<endl;
 			cout<<numberOfStops<<endl;
 			cout<<numberOfTeams<<endl;
-			for(int i = 0; i < numberOfStops; i++){
 				for(int j =0; j< numberOfTeams; j++){
 					team *curTeam = teamList->getElement(j);
 					cout<<curTeam->getName()<<endl;
 					curTeam->addTimes(generateTime());
 				}					
+			for(int i = 0; i < numberOfStops; i++){
 				queue<team> thisCity = sort();
 				cout<<"The "<<thisCity.getTail()->getName()<<" was the last to get to "<<stops.pop()<<"."<<endl;
 				thisCity.getTail()->makeOut();
