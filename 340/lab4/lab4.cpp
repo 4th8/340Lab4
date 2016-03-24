@@ -87,9 +87,9 @@ class list{
 		}
 		void add(T *content){
 			node<T> *temp = new node<T>;
-			cout<<"Here in add."<<endl;
+	//		cout<<"Here in add."<<endl;
 			temp->info = content;
-			temp->next = tail;
+			temp->next = NULL;
 			tail = temp;
 			if(size == 0){
 				head = temp;
@@ -97,7 +97,7 @@ class list{
 			size++;
 		}
 		T* getElement(int index){
-			cout<<"In get Element get index: "<<index<<endl;
+	//		cout<<"In get Element get index: "<<index<<endl;
 			cout<<"Size: "<<size<<endl;
 			if (index == 0){
 				return head->info;
@@ -284,13 +284,13 @@ class game{
 			cout<<"Here in run."<<endl;
 			cout<<numberOfStops<<endl;
 			cout<<numberOfTeams<<endl;
-			team *curTeam = teamList->getElement(0);
+			team *curTeam;
+			for(int i = 0; i < numberOfStops; i++){
 				for(int j =1; j< numberOfTeams; j++){
 					curTeam = teamList->getElement(j);
 					cout<<curTeam->getName()<<endl;
 					curTeam->addTimes(generateTime());
 				}					
-			for(int i = 0; i < numberOfStops; i++){
 				queue<team> thisCity = sort();
 				cout<<"The "<<thisCity.getTail()->getName()<<" was the last to get to "<<stops.pop()<<"."<<endl;
 				thisCity.getTail()->makeOut();
