@@ -182,6 +182,7 @@ class game{
 		team getMin(queue<team> teams){
 			team min;
 			int minTime;
+			team currTeam;
 			for(int i=0; i < numberOfTeams; i++){
 				currTeam = teams.getElement(i);
 				if(minTime == NULL){
