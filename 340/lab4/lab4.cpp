@@ -140,9 +140,6 @@ class team{
 
 			return arrivalTimes
 		}
-		int createTime(){
-			return(rand() % 24 + 5);
-		}
 };
 
 class game{
@@ -181,10 +178,7 @@ class game{
 			}
 		}
 		int generateTime(){
-			for(team t : teamTracker){
-				int time = t.createTime();
-				t.addTime(time);
-			}
+			return(rand() % 24 + 5);
 		}
 
 		team getMin(queue<team> teams){
