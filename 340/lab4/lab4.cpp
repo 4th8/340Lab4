@@ -233,6 +233,15 @@ class game{
 			}
 			return *city;
 		}
+	void printResults(){
+		for(int i =0; i< numberOfStops; i++){
+				string city = stops.pop();
+			for(int j=0; j<numberOfTeams; j++){
+				team team = teamTracker->getTail();
+				cout<< team.getName() << " was the last team to reach " << city << endl;
+			}
+		}
+	}
 };
 
 int main(){
