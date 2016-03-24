@@ -39,6 +39,7 @@ class queue{
 			cout << "Set content" << endl;
 			newnode->next = NULL;
 			newnode->prev = tail;
+			cout << "HERE" << endl;
 			tail->next= newnode;
 			tail = newnode;
 		}
