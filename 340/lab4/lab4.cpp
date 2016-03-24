@@ -91,6 +91,7 @@ class list{
 			cout<<"Here in add."<<endl;
 			temp->info = content;
 			temp->next = tail;
+
 			tail = temp;
 			if(size == 0){
 				head = temp;
@@ -128,13 +129,14 @@ class team{
 		bool isOut;
 	public:
 		team(){};
+
 		team(string n){
 			name = n;
-			cout<<"Name: "<<n<<endl;
 			numStops = 0;
 			isOut = false;
 			arrivalTimes = new list<int>;
 		}
+
 		void addTimes(int time){
 			cout<<"Added Time to: "<<name<<"\nTime is: "<<time<<endl;
 			arrivalTimes->add(&time);
@@ -166,10 +168,6 @@ class game{
 		list<team>* teamList;
 		int numberOfTeams;
 
-		void addTeam(team *team){
-			cout<<"Here in add Team."<<endl;
-			teamList->add(team);
-		}
 		void dequeue(){
 			teamTracker->pop();
 		}
@@ -197,8 +195,8 @@ class game{
 			while(file){
 				getline(file, line);
 				if(line != ""){
-					team *temp = new team(line);
-					addTeam(temp);
+					team *ptr = new team(line);
+					teamList.add(ptr);
 					numberOfTeams++;
 				}
 			}
