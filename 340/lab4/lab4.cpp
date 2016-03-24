@@ -92,6 +92,7 @@ class list{
 				temp = head;
 				temp = tail;
 			}
+			cout<<"Here"<<endl;
 			temp->info = content;
 			temp->next = tail;
 			tail = temp;
@@ -111,7 +112,6 @@ class list{
 			}
 		}
 		T getLastElement(){
-			cout<<"i"<<tail->info<<endl;
 			return tail->info;
 		}
 };
@@ -289,6 +289,7 @@ int main(){
 	cin.ignore();
 	game* theGame = new game();
 	theGame->loadStops(inputCities);
+	cout<<"Load Stops Works"<<endl;
 	theGame->loadTeams(inputTeams);
 	cout << "ALL LOADED IN" << endl;
 	theGame->run();
