@@ -110,7 +110,7 @@ class list{
 			} else{
 				node<T> *current = head;
 				for(int i=0; i < index; i++){
-					current = current->next;
+					current = current->prev;
 				}
 				return current->info;
 			}
