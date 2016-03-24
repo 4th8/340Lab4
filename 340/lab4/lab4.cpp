@@ -244,7 +244,7 @@ class game{
 			queue<team> *city = new queue<team>;
 			int curTime;
 			int min=0;
-			team minTeam = getMin(teamList);
+			team minTeam = getMin();
 			min = minTeam.getCurrentTime();
 			city->push(minTeam);
 			for(int i=1; i<numberOfTeams; i++){
@@ -277,7 +277,7 @@ class game{
 	void run(){
 		for(int i = 0; i < numberOfStops; i++){
 			queue<team> thisCity = sort();
-			cout<<"The "<<thisCity.getTail()<<" was the last to get to "<<stops.pop()<<"."<<endl;
+			cout<<"The "<<thisCity.getTail().getName()<<" was the last to get to "<<stops.pop()<<"."<<endl;
 			thisCity.getTail().makeOut();
 		}
 	}
