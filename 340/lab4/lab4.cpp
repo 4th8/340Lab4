@@ -253,5 +253,4 @@ int main(){
 	game* theGame = new game();
 	theGame->loadStops(inputCities);
 	theGame->loadTeams(inputTeams);
-	theGame->takeTurn();
 }
