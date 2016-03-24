@@ -36,9 +36,10 @@ class queue{
 			}
 			node<T> *newnode = new node<T>;
 			newnode->info = x;
-			newnode->next = tail;
-			newnode->prev = NULL;
-			tail->prev = newnode;
+			cout << "Set content" << endl;
+			newnode->next = NULL;
+			newnode->prev = tail;
+			tail->next= newnode;
 			tail = newnode;
 		}
 
@@ -178,6 +179,7 @@ class game{
 			while(file){
 				getline(file, line);
 				stops.push(line);
+				cout<< "passed push"<< endl;
 				numberOfStops++;
 			}
 		}
@@ -288,6 +290,7 @@ int main(){
 	inputTeams.open(filename.c_str(),ios::in);
 	cin.ignore();
 	game* theGame = new game();
+	cout <<"MADE GAME" << endl;
 	theGame->loadStops(inputCities);
 	cout<<"Load Stops Works"<<endl;
 	theGame->loadTeams(inputTeams);
