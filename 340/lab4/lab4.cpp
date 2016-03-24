@@ -284,8 +284,9 @@ class game{
 			cout<<"Here in run."<<endl;
 			cout<<numberOfStops<<endl;
 			cout<<numberOfTeams<<endl;
-				for(int j =0; j< numberOfTeams; j++){
-					team *curTeam = teamList->getElement(j);
+			team *curTeam = teamList->getElement(0);
+				for(int j =1; j< numberOfTeams; j++){
+					curTeam = teamList->getElement(j);
 					cout<<curTeam->getName()<<endl;
 					curTeam->addTimes(generateTime());
 				}					
