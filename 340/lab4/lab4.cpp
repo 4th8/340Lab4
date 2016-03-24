@@ -93,7 +93,7 @@ class list{
 				temp = tail;
 			}
 			temp->info = content;
-		    temp->next = tail;
+			temp->next = tail;
 			tail = temp;
 			size++;
 		}
@@ -111,22 +111,11 @@ class list{
 			}
 		}
 		T getLastElement(){
+			cout<<"i"<<tail->info<<endl;
 			return tail->info;
 		}
-		void removeElement(int index){
-			int current = head->index;
-			node<T> cur = *head;
-			while(current != index){
-				cur = *cur.next;
-				current = cur.index;
-			}
-			node<T> *last = cur.prev;
-			node<T> *n = cur.next;
-			last->next = cur.next;
-			n->prev = cur.prev;
-			delete cur;
-		}
 };
+
 class team{
 	private:
 		list<int> arrivalTimes;
@@ -181,7 +170,7 @@ class game{
 		void dequeue(){
 			teamTracker->pop();
 		}
-		
+
 	public:
 		game(){}
 		void loadStops(ifstream &file){	
@@ -213,13 +202,13 @@ class game{
 			for(int i=0; i < numberOfTeams; i++){
 				currTeam = teamList->getElement(i);
 				if(!currTeam.checkout()){
-				if(minTime == 0){
-					minTime = currTeam.getCurrentTime();
-					min = currTeam;
-				} else if(currTeam.getCurrentTime() < minTime){
-					minTime = currTeam.getCurrentTime();
-					min = currTeam;
-				}
+					if(minTime == 0){
+						minTime = currTeam.getCurrentTime();
+						min = currTeam;
+					} else if(currTeam.getCurrentTime() < minTime){
+						minTime = currTeam.getCurrentTime();
+						min = currTeam;
+					}
 				}
 			}
 			return min;
@@ -231,14 +220,14 @@ class game{
 			for(int i=0; i < numberOfTeams; i++){
 				currTeam = teamList->getElement(i);
 				if(!currTeam.checkout()){
-				if(minTime == 0){
-					minTime = currTeam.getCurrentTime();
-					min = currTeam;
-				}
-				else if(currTeam.getCurrentTime() < minTime && currTeam.getCurrentTime() > n){
-					minTime = currTeam.getCurrentTime();
-					min = currTeam;
-				}
+					if(minTime == 0){
+						minTime = currTeam.getCurrentTime();
+						min = currTeam;
+					}
+					else if(currTeam.getCurrentTime() < minTime && currTeam.getCurrentTime() > n){
+						minTime = currTeam.getCurrentTime();
+						min = currTeam;
+					}
 				} 
 			}
 			return min;
@@ -258,33 +247,33 @@ class game{
 			}
 			return *city;
 		}
-	void printResults(){
-		string city;
-		for(int i =0; i< numberOfStops; i++){
+		void printResults(){
+			string city;
+			for(int i =0; i< numberOfStops; i++){
 				cout<<stops.pop();
-			for(int j=0; j<numberOfTeams; j++){
-				team team = teamTracker->getTail();
-				cout<< team.getName() << " was the last team to reach " << city << endl;
+				for(int j=0; j<numberOfTeams; j++){
+					team team = teamTracker->getTail();
+					cout<< team.getName() << " was the last team to reach " << city << endl;
+				}
+			}
+			cout<< "Teams\t\t";
+			for(int i=1; i<numberOfStops; i++){
+				cout<< "Round " << i << "\t";
+
+			} cout<<endl;
+			team  currTeam;
+			for (int i=0; i <numberOfTeams; i++){
+				currTeam = teamList->getElement(i);
+				cout<< currTeam.getName()<<"\t"<<currTeam.getTimes()<<endl;
 			}
 		}
-		cout<< "Teams\t\t";
-		for(int i=1; i<numberOfStops; i++){
-			cout<< "Round " << i << "\t";
-			
-		} cout<<endl;
-			team  currTeam;
-		for (int i=0; i <numberOfTeams; i++){
-			currTeam = teamList->getElement(i);
-			cout<< currTeam.getName()<<"\t"<<currTeam.getTimes()<<endl;
+		void run(){
+			for(int i = 0; i < numberOfStops; i++){
+				queue<team> thisCity = sort();
+				cout<<"The "<<thisCity.getTail().getName()<<" was the last to get to "<<stops.pop()<<"."<<endl;
+				thisCity.getTail().makeOut();
+			}
 		}
-	}
-	void run(){
-		for(int i = 0; i < numberOfStops; i++){
-			queue<team> thisCity = sort();
-			cout<<"The "<<thisCity.getTail().getName()<<" was the last to get to "<<stops.pop()<<"."<<endl;
-			thisCity.getTail().makeOut();
-		}
-	}
 };
 
 int main(){
