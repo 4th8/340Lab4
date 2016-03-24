@@ -211,7 +211,7 @@ class game{
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
 				}
-				else if(currTeam.getCurrentTime() < min && t->tail > n){
+				else if(currTeam.getCurrentTime() < min && currTeam.getCurrentTime() > n){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
 				} 
@@ -224,12 +224,14 @@ class game{
 			int curTime;
 			int min=0;
 			team minTeam = getMin(teams);
+			min = minTeam.getCurrentTime();
 			city.push(minTeam);
 			for(int i=1; i<numberOfTeams; i++){
-				team tempMin = getMin(teams, i);
-				if(temp
-				city.push(city);
+				team tempMin = getMin(teams-1, min);
+				min = temMin.getCurrentTime();
+				city.push(tempMin);
 			}
+			return city;
 		}
 		void initTurn(){
 			teamTracker = new queue<team>;
