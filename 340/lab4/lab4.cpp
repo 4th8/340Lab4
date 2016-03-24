@@ -199,7 +199,7 @@ class game{
 			int minTime=0;
 			team currTeam;
 			for(int i=0; i < numberOfTeams; i++){
-				currTeam = teams.getElement(i);
+				currTeam = teamList->getElement(i);
 				if(minTime == 0){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
@@ -215,7 +215,7 @@ class game{
 			team currTeam;
 			int minTime=0;
 			for(int i=0; i < numberOfTeams; i++){
-				currTeam = teams.getElement(i);
+				currTeam = teamList->getElement(i);
 				if(minTime == 0){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
@@ -232,11 +232,11 @@ class game{
 			queue<team> *city = new queue<team>;
 			int curTime;
 			int min=0;
-			team minTeam = getMin(teams);
+			team minTeam = getMin(teamList);
 			min = minTeam.getCurrentTime();
 			city->push(minTeam);
 			for(int i=1; i<numberOfTeams; i++){
-				team tempMin = getMin(teams, min);
+				team tempMin = getMin(min);
 				min = tempMin.getCurrentTime();
 				city->push(tempMin);
 			}
@@ -265,7 +265,7 @@ class game{
 	void run(){
 		for(int i = 0; i < numberOfStops; i++){
 			queue<team> thisCity = sort();
-			cout<<"The "<<thisCity.getTail()<<" was the last to get to "<<stops.pop()<<"."<<endl;
+			cout<<"The "<< thisCity.getTail() <<" was the last to get to "<<stops.pop()<<"."<<endl;
 		}
 	}
 };
