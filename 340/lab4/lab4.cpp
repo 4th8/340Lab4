@@ -7,22 +7,24 @@
 #include <stdlib.h>  
 using namespace std;
 template <typename T>
+struct node{
+	T info;
+	node *prev;
+	node *next;
+	int index;
+};
+
+template <typename T>
 class queue{
 	private:
-		struct node {
-			T info;
-			node *prev;
-			node *next;
-		};
-
-		node *head;
-		node *tail;
+		struct node<T> *head;
+		struct node<T> *tail;
 		bool isempty;
 
 	public:
 		queue(){
-			node h;
-			node t;
+			node<T> h;
+			node<T> t;
 			head = &h;
 			tail = &t;
 			isempty = true;
@@ -32,7 +34,7 @@ class queue{
 			if(isempty){
 				isempty = false;
 			}
-			node *newnode = new node;
+			node<T> *newnode = new node<T>;
 			newnode->info = x;
 			newnode->next = tail;
 			newnode->prev = NULL;
@@ -45,7 +47,7 @@ class queue{
 				exit (EXIT_FAILURE);		
 			}
 			T top = head->info;
-			node *oldHead = head;
+			node<T> *oldHead = head;
 			head = head->prev;
 			if(head == NULL){
 				isempty = true;
@@ -59,14 +61,9 @@ class queue{
 template <typename T>
 class list{
 	private:
-		struct listNode{
-			int index;
-			T info;
-			listNode *prev;
-			listNode *next;
-		};
-		listNode *head;
-		listNode *tail;
+		node<T> *head;
+		node<T> *tail;
+		int size;
 
 	public:
 		list(){
@@ -74,51 +71,45 @@ class list{
 			tail = NULL;
 		}
 		list(T content){
-			listNode temp;
+			node<T> temp;
 			temp.info = content;
-			temp.index = 0;
 			temp.prev = NULL;
 			head = &temp;
 			tail = head;
 		}
 		void add(T content){
-			listNode temp;
-			temp.info = content;
-			temp.index = tail->index + 1;
-		       	temp.prev = tail;
-			temp.next = NULL;
-			tail->next = &temp;
-		//	tail = &tail;	
+			node<T> *temp = new node<T>;
+			temp->info = content;
+		    temp->next = head;
+			head = temp;
+			size++;
 		}
 		T getElement(int index){
-			int current = head->index;
-			listNode cur = *head;
-			while(current != index){
-				cur = *cur.next;
-				current = cur.index;
+			if (index == 0){
+				return head->info;	
+			} else if(index == size -1){
+				return tail->info;
+			} else{
+				node<T> *current = head;
+				for(int i=0; i < index; i++){
+					current = current->next;
+				}
+				return current->info;
 			}
-			return cur.info;
 		}
 		void removeElement(int index){
 			int current = head->index;
-			listNode cur = *head;
+			node<T> cur = *head;
 			while(current != index){
 				cur = *cur.next;
 				current = cur.index;
 			}
-			listNode *last = cur.prev;
-			listNode *n = cur.next;
+			node<T> *last = cur.prev;
+			node<T> *n = cur.next;
 			last->next = cur.next;
 			n->prev = cur.prev;
 			delete cur;
 		}
-
-
-
-
-
-
-
 };
 class team{
 	private:
@@ -139,13 +130,10 @@ class team{
 		string getName(){
 			return name;
 		}
-		int printTimes(){
-			cout<< name<< "     ";
+		int getTimes(){
 			for(int i = 0; i<numStops; i++){
 				int time = arrivalTimes.getElement(i);
-				cout<< "     " << time;
 			}
-			cout<<"\n";
 		}
 
 };
@@ -171,28 +159,24 @@ class game{
 	public:
 		game(){
 			teamTracker = new queue<team>;
-			teamList = new list<team>;	
 		}
 		void loadStops(ifstream &file){	
 			string line;
 			while(file){
 				getline(file, line);
-				cout<< line << endl;
 				stops.push(line);
 				numberOfStops++;
 			}
-			cout<< "DONE ADDING STOPS" << endl;
 		}
 		void loadTeams(ifstream &file){
+			teamList = new list<team>;	
 			string line;
 			while(file){
 				getline(file, line);
-				cout<< line << endl;
 				team temp = team(line);
 				addTeam(temp);
 				numberOfTeams++;
 			}
-			cout << "DONE ADDING TEAMS" << endl;
 		}
 		void takeTurn(){
 			if(!stops.checkEmpty()){
