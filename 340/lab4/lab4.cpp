@@ -222,11 +222,11 @@ class game{
 			queue<teams> city = new queue<team>;
 			int curTime;
 			int min=0;
-			string name = getMin(teams);
-			getTeam(string n)
-			city.push(name);
+			team minTeam = getMin(teams);
+			city.push(minTeam);
 			for(int i=1; i<numberOfTeams; i++){
-				name = getMin(teams, i);
+				team tempMin = getMin(teams, i);
+				if(temp
 				city.push(city);
 			}
 		}
