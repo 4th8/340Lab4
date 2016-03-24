@@ -187,11 +187,11 @@ class game{
 
 		team getMin(list<team> teams){
 			team min;
-			int minTime;
+			int minTime=0;
 			team currTeam;
 			for(int i=0; i < numberOfTeams; i++){
 				currTeam = teams.getElement(i);
-				if(minTime == NULL){
+				if(minTime == 0){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
 				} else if(currTeam.getCurrentTime() < minTime){
@@ -204,14 +204,14 @@ class game{
 		team getMin(list<team> teams, int n){
 			team min;
 			team currTeam;
-			int minTime;
+			int minTime=0;
 			for(int i=0; i < numberOfTeams; i++){
 				currTeam = teams.getElement(i);
-				if(minTime == NULL){
+				if(minTime == 0){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
 				}
-				else if(currTeam.getCurrentTime() < min && currTeam.getCurrentTime() > n){
+				else if(currTeam.getCurrentTime() < minTime && currTeam.getCurrentTime() > n){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
 				} 
@@ -228,16 +228,10 @@ class game{
 			city->push(minTeam);
 			for(int i=1; i<numberOfTeams; i++){
 				team tempMin = getMin(teams, min);
-				min = teamMin.getCurrentTime();
+				min = tempMin.getCurrentTime();
 				city->push(tempMin);
 			}
-			return city;
-		}
-		void initTurn(){
-			teamTracker = new queue<team>;
-			for(int i=0; i < numbeOfTeams; i++){
-				teamTracker.
-			}
+			return *city;
 		}
 };
 
