@@ -195,7 +195,7 @@ class game{
 				if(minTime == NULL){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
-				} else if(currTeam->tail < minTime){
+				} else if(currTeam.getCurrentTime() < minTime){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
 				} 
@@ -203,21 +203,22 @@ class game{
 			return min;
 		}
 		int getMin(queue<team> teams, int n){
-			int min;
-			team t;
-			string teamName;
+			team min;
+			int minTime;
 			for(int i=0; i < numberOfTeams; i++){
-				if(min==NULL){
-					min = t->tail;
-					teamName = t.getName();
-				}else if(t->tail < min && t->tail > n){
-					min = t->tail;
-					teamName = t.getName();
+				currTeam = teams.getElement(i);
+				if(minTime == NULL){
+					minTime = currTeam.getCurrentTime();
+					min = currTeam;
 				}
-				return teamName;
-			}	
-
+				else if(currTeam.getCurrentTime() < min && t->tail > n){
+					minTime = currTeam.getCurrentTime();
+					min = currTeam;
+				} 
+			}
+			return min;
 		}
+
 		queue<team> sort(queue<team> teams){
 			queue<teams> city = new queue<team>;
 			int curTime;
