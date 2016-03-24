@@ -249,4 +249,6 @@ int main(){
 	game* theGame = new game();
 	theGame->loadStops(inputCities);
 	theGame->loadTeams(inputTeams);
+	cout << "ALL LOADED IN" << endl;
+	return 0;
 }
