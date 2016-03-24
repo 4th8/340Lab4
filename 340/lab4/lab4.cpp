@@ -274,6 +274,7 @@ class game{
 			for(int i = 0; i < numberOfStops; i++){
 				queue<team> thisCity = sort();
 				cout<<"The "<<thisCity.getTail().getName()<<" was the last to get to "<<stops.pop()<<"."<<endl;
+				cout<<"Here in run."<<endl;
 				thisCity.getTail().makeOut();
 			}
 		}
@@ -290,13 +291,12 @@ int main(){
 	ifstream inputTeams;
 	inputTeams.open(filename.c_str(),ios::in);
 	cin.ignore();
-	game* theGame = new game();
+	game theGame;
 	cout <<"MADE GAME" << endl;
-	theGame->loadStops(inputCities);
+	theGame.loadStops(inputCities);
 	cout<<"Load Stops Works"<<endl;
-	theGame->loadTeams(inputTeams);
+	theGame.loadTeams(inputTeams);
 	cout << "ALL LOADED IN" << endl;
-	theGame->run();
-	theGame->printResults();
+	theGame.run();
 	return 0;
 }
