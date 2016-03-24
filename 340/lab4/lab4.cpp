@@ -97,6 +97,9 @@ class list{
 				return current->info;
 			}
 		}
+		T getLastElement(){
+			return tail->info;
+		}
 		void removeElement(int index){
 			int current = head->index;
 			node<T> cur = *head;
@@ -137,6 +140,9 @@ class team{
 		}
 		list<int> getLastTime(int length){
 			return arrivalTimes;
+		}
+		int getCurrentTime(){
+			return arrivalTimes.getLastElement();
 		}
 };
 
