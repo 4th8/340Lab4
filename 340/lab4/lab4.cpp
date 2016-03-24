@@ -82,7 +82,6 @@ class list{
 		list(T content){
 			node<T> *temp = new node<T>;
 			temp->info = content;
-			temp->prev = NULL;
 			head = temp;
 			tail = head;
 		}
@@ -91,12 +90,9 @@ class list{
 			cout<<"Here in add."<<endl;
 			temp->info = content;
 			temp->next = tail;
-			tail->prev= temp;
-			temp->prev = NULL;
 			tail = temp;
 			if(size == 0){
 				head = temp;
-				head->prev = tail;
 			}
 			size++;
 		}
@@ -108,9 +104,9 @@ class list{
 			} else if(index == size -1){
 				return tail->info;
 			} else{
-				node<T> *current = head;
+				node<T> *current = tail;
 				for(int i=0; i < index; i++){
-					current = current->prev;
+					current = current->next;
 				}
 				return current->info;
 			}
