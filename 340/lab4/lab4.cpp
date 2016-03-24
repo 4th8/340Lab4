@@ -87,15 +87,15 @@ class list{
 			tail = head;
 		}
 		void add(T content){
-			node<T> *temp = new node<T>;
+			node<T> temp;
 			if(head == NULL || tail == NULL){
-				temp = head;
-				temp = tail;
+				head = &temp;
+				tail = &temp;
 			}
-			cout<<"Here"<<endl;
-			temp->info = content;
-			temp->next = tail;
-			tail = temp;
+			cout<<"Here in add."<<endl;
+			temp.info = content;
+			temp.next = tail;
+			tail = &temp;
 			size++;
 		}
 		T getElement(int index){
@@ -165,6 +165,7 @@ class game{
 		int numberOfTeams;
 
 		void addTeam(team team){
+			cout<<"Here in add Team."<<endl;
 			teamList->add(team);
 		}
 		void dequeue(){
