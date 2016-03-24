@@ -1,4 +1,4 @@
-// Team members: Nathanael Woodhaed, Sophia Therriault, Mikaela Goldrich, maddy ernesto
+// Team members: Nathanael Woodhaed the Great, Sophia Therriault, Mikaela Goldrich, maddy ernesto
 #include <sstream>
 #include <fstream>
 #include <iostream>
