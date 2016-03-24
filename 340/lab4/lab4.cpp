@@ -54,6 +54,10 @@ class queue{
 			}
 			return top;
 		}
+		T peak(){
+			return head->info;
+		}
+
 		bool checkEmpty(){
 			return isempty;
 		}
@@ -190,7 +194,7 @@ class game{
 			return(rand() % 24 + 5);
 		}
 
-		team getMin(list<team> teams){
+		team getMin(){
 			team min;
 			int minTime=0;
 			team currTeam;
@@ -206,7 +210,7 @@ class game{
 			}
 			return min;
 		}
-		team getMin(list<team> teams, int n){
+		team getMin(int n){
 			team min;
 			team currTeam;
 			int minTime=0;
@@ -224,7 +228,7 @@ class game{
 			return min;
 		}
 
-		queue<team> sort(list<team> teams){
+		queue<team> sort(){
 			queue<team> *city = new queue<team>;
 			int curTime;
 			int min=0;
@@ -239,21 +243,29 @@ class game{
 			return *city;
 		}
 	void printResults(){
+		string city;
 		for(int i =0; i< numberOfStops; i++){
-				string city = stops.pop();
+				cout<<stops.pop();
 			for(int j=0; j<numberOfTeams; j++){
 				team team = teamTracker->getTail();
 				cout<< team.getName() << " was the last team to reach " << city << endl;
 			}
 		}
-		cout<< "Teams          ";
+		cout<< "Teams\t\t";
 		for(int i=1; i<numberOfStops; i++){
-			cout<< "Round " << i << "     ";
+			cout<< "Round " << i << "\t";
 			
 		} cout<<endl;
-		for (int i=0; i <numberOfTeams; i++){
 			team  currTeam;
-			cout<< currTeam. 
+		for (int i=0; i <numberOfTeams; i++){
+			currTeam = teamList->getElement(i);
+			cout<< currTeam.getName()<<"\t"<<currTeam.getTimes()<<endl;
+		}
+	}
+	void run(){
+		for(int i = 0; i < numberOfStops; i++){
+			queue<team> thisCity = sort();
+			cout<<"The "<<thisCity.getTail()<<" was the last to get to "<<stops.pop()<<"."<<endl;
 		}
 	}
 };
@@ -273,5 +285,7 @@ int main(){
 	theGame->loadStops(inputCities);
 	theGame->loadTeams(inputTeams);
 	cout << "ALL LOADED IN" << endl;
+	theGame->run();
+	theGame->printResults();
 	return 0;
 }
