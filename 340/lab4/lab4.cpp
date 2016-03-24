@@ -123,8 +123,8 @@ class team{
 			numStops = 0;
 		}
 		void addTimes(int time){
-				arrivalTimes.add(time);
-				numStops++;
+			arrivalTimes.add(time);
+			numStops++;
 		}
 		~team(){};
 		string getName(){
@@ -135,7 +135,14 @@ class team{
 				int time = arrivalTimes.getElement(i);
 			}
 		}
+		int getLastTime(int length){
+			
 
+			return arrivalTimes
+		}
+		int createTime(){
+			return(rand() % 24 + 5);
+		}
 };
 
 class game{
@@ -153,13 +160,8 @@ class game{
 			teamTracker->pop();
 		}
 		
-		int createTime(){
-			return(rand() % 24 + 5);
-		}
 	public:
-		game(){
-			teamTracker = new queue<team>;
-		}
+		game(){}
 		void loadStops(ifstream &file){	
 			string line;
 			while(file){
@@ -178,16 +180,60 @@ class game{
 				numberOfTeams++;
 			}
 		}
-		void takeTurn(){
-			if(!stops.checkEmpty()){
-				string city = stops.pop();
-				string loser;
-				for(int i=0; i<numberOfStops; i++){
-					team temp = teamTracker->pop();
-					int time = createTime();
-					temp.addTimes(time);
-						
+		int generateTime(){
+			for(team t : teamTracker){
+				int time = t.createTime();
+				t.addTime(time);
+			}
+		}
+
+		team getMin(queue<team> teams){
+			team min;
+			int minTime;
+			for(int i=0; i < numberOfTeams; i++){
+				currTeam = teams.getElement(i);
+				if(minTime == NULL){
+					minTime = currTeam.getCurrentTime();
+					min = currTeam;
+				} else if(currTeam->tail < minTime){
+					minTime = currTeam.getCurrentTime();
+					min = currTeam;
+				} 
+			}
+			return min;
+		}
+		int getMin(queue<team> teams, int n){
+			int min;
+			team t;
+			string teamName;
+			for(int i=0; i < numberOfTeams; i++){
+				if(min==NULL){
+					min = t->tail;
+					teamName = t.getName();
+				}else if(t->tail < min && t->tail > n){
+					min = t->tail;
+					teamName = t.getName();
 				}
+				return teamName;
+			}	
+
+		}
+		queue<team> sort(queue<team> teams){
+			queue<teams> city = new queue<team>;
+			int curTime;
+			int min=0;
+			string name = getMin(teams);
+			getTeam(string n)
+			city.push(name);
+			for(int i=1; i<numberOfTeams; i++){
+				name = getMin(teams, i);
+				city.push(city);
+			}
+		}
+		void initTurn(){
+			teamTracker = new queue<team>;
+			for(int i=0; i < numbeOfTeams; i++){
+				teamTracker.
 			}
 		}
 };
@@ -206,5 +252,5 @@ int main(){
 	game* theGame = new game();
 	theGame->loadStops(inputCities);
 	theGame->loadTeams(inputTeams);
-
+	theGame->takeTurn();
 }
