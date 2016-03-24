@@ -127,12 +127,14 @@ class team{
 	private:
 		list<int> arrivalTimes;
 		int numStops;
+		bool isOut;
 	public:
 		string name;
 		team(){};
 		team(string n){
 			name = n;
 			numStops = 0;
+			isOut = false;
 		}
 		void addTimes(int time){
 			arrivalTimes.add(time);
@@ -141,6 +143,12 @@ class team{
 		~team(){};
 		string getName(){
 			return name;
+		}
+		bool checkout(){
+			return isOut;
+		}
+		void makeOut(){
+			isOut = true;
 		}
 		int getTimes(){
 			for(int i = 0; i<numStops; i++){
@@ -200,13 +208,15 @@ class game{
 			team currTeam;
 			for(int i=0; i < numberOfTeams; i++){
 				currTeam = teams.getElement(i);
+				if(!currTeam.checkout()){
 				if(minTime == 0){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
 				} else if(currTeam.getCurrentTime() < minTime){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
-				} 
+				}
+				}
 			}
 			return min;
 		}
@@ -216,6 +226,7 @@ class game{
 			int minTime=0;
 			for(int i=0; i < numberOfTeams; i++){
 				currTeam = teams.getElement(i);
+				if(!currTeam.checkout()){
 				if(minTime == 0){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
@@ -223,6 +234,7 @@ class game{
 				else if(currTeam.getCurrentTime() < minTime && currTeam.getCurrentTime() > n){
 					minTime = currTeam.getCurrentTime();
 					min = currTeam;
+				}
 				} 
 			}
 			return min;
@@ -266,6 +278,7 @@ class game{
 		for(int i = 0; i < numberOfStops; i++){
 			queue<team> thisCity = sort();
 			cout<<"The "<<thisCity.getTail()<<" was the last to get to "<<stops.pop()<<"."<<endl;
+			thisCity.getTail().makeOut();
 		}
 	}
 };
