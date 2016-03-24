@@ -201,7 +201,8 @@ class game{
 		}
 		int generateTime(){
 			cout<<"Generating random time."<<endl;
-			return(rand() % 24 + 5);
+			int x = rand() % 24 + 5;
+			return x;
 		}
 
 		team* getMin(){
