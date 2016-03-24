@@ -88,10 +88,13 @@ class list{
 		}
 		void add(T content){
 			node<T> *temp = new node<T>;
+			if(head == NULL || tail == NULL){
+				temp = head;
+				temp = tail;
+			}
 			temp->info = content;
-		    temp->next = head;
-			temp->prev = tail;
-			head = temp;
+		    temp->next = tail;
+			tail = temp;
 			size++;
 		}
 		T getElement(int index){
