@@ -195,8 +195,9 @@ class game{
 			}
 			return min;
 		}
-		int getMin(list<team> teams, int n){
+		team getMin(list<team> teams, int n){
 			team min;
+			team currTeam;
 			int minTime;
 			for(int i=0; i < numberOfTeams; i++){
 				currTeam = teams.getElement(i);
@@ -213,16 +214,16 @@ class game{
 		}
 
 		queue<team> sort(list<team> teams){
-			queue<team> city = new queue<team>;
+			queue<team> *city = new queue<team>;
 			int curTime;
 			int min=0;
 			team minTeam = getMin(teams);
 			min = minTeam.getCurrentTime();
-			city.push(minTeam);
+			city->push(minTeam);
 			for(int i=1; i<numberOfTeams; i++){
-				team tempMin = getMin(teams-1, min);
-				min = temMin.getCurrentTime();
-				city.push(tempMin);
+				team tempMin = getMin(teams, min);
+				min = teamMin.getCurrentTime();
+				city->push(tempMin);
 			}
 			return city;
 		}
