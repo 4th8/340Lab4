@@ -212,7 +212,7 @@ class game{
 		}
 
 		queue<team> sort(queue<team> teams){
-			queue<teams> city = new queue<team>;
+			queue<team> city = new queue<team>;
 			int curTime;
 			int min=0;
 			team minTeam = getMin(teams);
