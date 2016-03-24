@@ -57,6 +57,11 @@ class queue{
 		bool checkEmpty(){
 			return isempty;
 		}
+
+		T getTail(){
+			T bottom = tail->info;
+			return bottom;
+		}
 };
 template <typename T>
 class list{
@@ -240,6 +245,15 @@ class game{
 				team team = teamTracker->getTail();
 				cout<< team.getName() << " was the last team to reach " << city << endl;
 			}
+		}
+		cout<< "Teams          ";
+		for(int i=1; i<numberOfStops; i++){
+			cout<< "Round " << i << "     ";
+			
+		} cout<<endl;
+		for (int i=0; i <numberOfTeams; i++){
+			team  currTeam;
+			cout<< currTeam. 
 		}
 	}
 };
