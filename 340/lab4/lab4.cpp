@@ -90,6 +90,7 @@ class list{
 			node<T> *temp = new node<T>;
 			temp->info = content;
 		    temp->next = head;
+			temp->prev = tail;
 			head = temp;
 			size++;
 		}
