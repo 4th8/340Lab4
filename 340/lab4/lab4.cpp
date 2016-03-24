@@ -136,7 +136,7 @@ class team{
 			}
 		}
 		list<int> getLastTime(int length){
-			return arrivalTimes
+			return arrivalTimes;
 		}
 };
 
