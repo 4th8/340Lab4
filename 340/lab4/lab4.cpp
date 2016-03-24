@@ -179,7 +179,7 @@ class game{
 			return(rand() % 24 + 5);
 		}
 
-		team getMin(queue<team> teams){
+		team getMin(list<team> teams){
 			team min;
 			int minTime;
 			team currTeam;
@@ -195,7 +195,7 @@ class game{
 			}
 			return min;
 		}
-		int getMin(queue<team> teams, int n){
+		int getMin(list<team> teams, int n){
 			team min;
 			int minTime;
 			for(int i=0; i < numberOfTeams; i++){
@@ -212,7 +212,7 @@ class game{
 			return min;
 		}
 
-		queue<team> sort(queue<team> teams){
+		queue<team> sort(list<team> teams){
 			queue<team> city = new queue<team>;
 			int curTime;
 			int min=0;
