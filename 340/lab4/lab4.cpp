@@ -174,7 +174,11 @@ class game{
 		}
 
 	public:
-		game(){}
+		game(){
+		numberOfStops = 0;
+		numberOfTeams = 0;
+		
+		}
 		void loadStops(ifstream &file){	
 			string line;
 			while(file){
@@ -271,10 +275,11 @@ class game{
 			}
 		}
 		void run(){
+				cout<<"Here in run."<<endl;
+				cout<<numberOfStops<<endl;
 			for(int i = 0; i < numberOfStops; i++){
 				queue<team> thisCity = sort();
 				cout<<"The "<<thisCity.getTail().getName()<<" was the last to get to "<<stops.pop()<<"."<<endl;
-				cout<<"Here in run."<<endl;
 				thisCity.getTail().makeOut();
 			}
 		}
