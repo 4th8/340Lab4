@@ -68,7 +68,8 @@ node * buildTree(my_da_array<node> array){ //I think that we might need to deal 
 
 
 void genCode(char cur, node * root, string coded){// This will generate the code recursively.
-	if(root->checkLeaf()){
+	if(root->checkLeaf() == true){
+		cout<<root->getVal()<<endl;
 		if(root->getVal() == cur){
 			cout<<"Found "<<cur<<"!\nPath: "<<coded<<endl;
 		}

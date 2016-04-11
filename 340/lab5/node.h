@@ -3,7 +3,7 @@ using namespace std;
 class node{
 	
 	private:
-		data d;
+		data * d;
 		node *left;
 		node *right;
 		bool isLeaf;
@@ -14,16 +14,18 @@ class node{
 		node(){}
 
 		node(char x, double w){
-			d = data(x,w);
+			d = new data(x,w);
 			left = NULL;
 			right = NULL;
 			isLeaf = true;
+			used = false;
 		}
 
 		node(double weight, node *l, node *r){
-			d = data(weight);
+			d = new data(weight);
 			left = l;
 			right = r;
+			used = false;
 			isLeaf = false;
 		}
 
@@ -41,11 +43,10 @@ class node{
 		}
 
 		bool checkLeaf(){
-			cout<<"Is leaf: "<<isLeaf<<endl;
 			return isLeaf;
 		}
 		char getVal(){
-			return d.getVal();
+			return d->getVal();
 		}
 		
 		node* getRight(){
@@ -62,6 +63,6 @@ class node{
 			return used;
 		};
 		double getWeight(){
-			return d.getWeight();
+			return d->getWeight();
 		}
 };
