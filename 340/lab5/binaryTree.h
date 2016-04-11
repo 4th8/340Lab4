@@ -24,6 +24,20 @@ class binaryTree{
 void binaryTree::reset(){
 	current = head;
 }
+
+bool hasLeft(){
+	if(current->getLeft() != NULL){
+		return true;
+	}
+	return false;
+}
+bool hasRight(){
+	if(current->getRight() != NULL){
+		return true;
+	}
+	return false;
+}
+
 char binaryTree::checkLeft(){
 	return current->getLeft()->getVal();
 }
