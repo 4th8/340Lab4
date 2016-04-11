@@ -67,75 +67,9 @@ node * buildTree(my_da_array<node> array){ //I think that we might need to deal 
 }	
 
 
-void findInTree(binaryTree tree, string coded){
-	if(tree.hasLeft()){
-		tree
-	}
-}
-/*
-string incode(binaryTree tree,my_da_array<node> weights){
-	ifstream text;
-	text.open("TextFile.txt");// this needs to be overwritten with a prompt.
-	string coded;
-	while(text){
-		string line;
-		getline(text, line);
-		int length = line.length();
-		for(int i = 0; i <length; i++){
-			char currentletter = line[i];
-			cout<<"Current Letter: "<<currentletter<<endl;
-			double weight;
-			for(int i = 0; i < weights.get_size(); i++){
-				if(currentletter == weights.get_elem(i).getVal()){
-					weight = weights.get_elem(i).getWeight();
-					break;
-				}
-			}
-			cout<<"Current Letter weight: "<<weight<<endl;
-			cout<<"Current Node weight: "<<tree.Weight()<<endl;
-			bool found = false;
-			while(!found){
-				if(!tree.isLeaf()){
-					cout<<"Not a leaf."<<endl;
-					if(tree.leftWeight() >= weight){
-						tree.goLeft();
-						cout<<"Gone Left"<<endl;
-						coded += "0";
-						if(tree.isLeaf()){
-							if(tree.getVal() == currentletter){
-								cout<<"Found"<<endl;
-								found = true;
-								tree.reset();
-							}
-						}
-					}
-
-					else{
-						tree.goRight();
-						cout<<"Gone Right"<<endl;
-						coded += "1";
-						if(tree.isLeaf()){
-							if(tree.getVal() == currentletter){
-								found = true;
-								cout<<"Found"<<endl;
-								tree.reset();
-							}
-						}
-					}
-				}
-				else{
-					cout<<"This is a leaf you messed up."<<endl;
-				}
-			}
-		}
-	}
-	return coded;
-}
-*/
-
-void genCode(char cur, node root, string coded){// This will generate the code recursively.
-	if(root->isLeaf()){
-		if(root.getVal() == cur){
+void genCode(char cur, node * root, string coded){// This will generate the code recursively.
+	if(root->checkLeaf()){
+		if(root->getVal() == cur){
 			cout<<"Found "<<cur<<"!\nPath: "<<coded<<endl;
 		}
 	}
@@ -146,12 +80,32 @@ void genCode(char cur, node root, string coded){// This will generate the code r
 		genCode(cur,root->getRight(),coded+"1");
 	}
 }
+string incode(node *root){
+	ifstream text;
+	text.open("TextFile.txt");// this needs to be overwritten with a prompt.
+	string coded;
+	while(text){
+		string line;
+		getline(text, line);
+		int length = line.length();
+		for(int i = 0; i <length; i++){
+			char currentletter = line[i];
+			cout<<"Current Letter: "<<currentletter<<endl;
+			string coded = "";
+			genCode(currentletter,root,coded);
+		}
+	}
+	return coded;
+}
+
+
 
 
 int main(){
 	my_da_array<node> weights = readWeights();
 	//binaryTree tree = buildTree(weights);
 	node * root = buildTree(weights);
+	incode(root);
 	//string coded = incode(tree,weights);
 	return 0;
 

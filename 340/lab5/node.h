@@ -15,6 +15,8 @@ class node{
 
 		node(char x, double w){
 			d = data(x,w);
+			left = NULL;
+			right = NULL;
 			isLeaf = true;
 		}
 
@@ -25,7 +27,21 @@ class node{
 			isLeaf = false;
 		}
 
+		bool hasLeft(){
+			if(left){
+				return true;
+			}
+			return false;
+		}
+		bool hasRight(){
+			if(right){
+				return true;
+			}
+			return false;
+		}
+
 		bool checkLeaf(){
+			cout<<"Is leaf: "<<isLeaf<<endl;
 			return isLeaf;
 		}
 		char getVal(){
