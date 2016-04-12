@@ -3,7 +3,10 @@
 #include <sstream> // Needed for stringstream
 #include <stdlib.h>
 #include "keygen.h"
+#include "decoder.h"
+
 using namespace std;
+
 my_da_array<node*> readWeights(){
 	my_da_array<node*> array;
 	ifstream weightsFile;
@@ -50,7 +53,8 @@ int main(){
 	cout<<encoded<<endl;
 	keygen k = keygen(root);
 	string key = k.getKey();
-
+	decoder d = decoder(root);
+	string decoded = d.getText();
 	return 0;
 
 }
