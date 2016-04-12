@@ -8,16 +8,16 @@
 
 using namespace std;
 
-my_da_array<node> createWeights(){
-	my_da_array<node> array;
+my_da_array<node*> createWeights(){
+	my_da_array<node*> array;
 	ifstream textfile;
 	textfile.open("TextFile.txt"); // this will need to be a input later.
 	while(textfile){
 	}
 }
 
-my_da_array<node> readWeights(){
-	my_da_array<node> array;
+my_da_array<node*> readWeights(){
+	my_da_array<node*> array;
 	ifstream weightsFile;
 	weightsFile.open("weights.txt"); // This will need to be an input later.
 	while(weightsFile){
@@ -35,7 +35,7 @@ my_da_array<node> readWeights(){
 		ss << line; //gives the string to the stringstream
 		ss >> weight; //gets the double out of the stringstream
 		node * currentNode = new node(hh,weight);
-		array.da_push(*currentNode);
+		array.da_push(currentNode);
 		//cout<<"making node with: "<<hh<<" "<<weight<<endl;
 
 	}
@@ -43,10 +43,8 @@ my_da_array<node> readWeights(){
 }
 
 
-node * buildTree(my_da_array<node> array){ //I think that we might need to deal with the nodes of the tree directly. So I am changing this
+node * buildTree(my_da_array<node*> array){ //I think that we might need to deal with the nodes of the tree directly. So I am changing this
 												// to return the head node. Not a tree. The binary tree class may just go away...
-	node * low1;
-	node * low2;
 	while(array.getRemaining()!=1){
 		node * min1 = array.find_maxmin(false);// finds the 2 lowest weighted nodes.
 		node * min2 = array.find_maxmin(false);
@@ -57,7 +55,7 @@ node * buildTree(my_da_array<node> array){ //I think that we might need to deal 
 		node * head = new node(weight, min1, min2); //Creates a new node that connects the 2 lowest nodes that
 		//has the weight of the 2 lowest nodes combined.
 		//cout<<"Making new node with:\n\tWeight: "<<weight<<endl;
-		array.da_push(*head);// Adds the new node to the list of all of the nodes.
+		array.da_push(head);// Adds the new node to the list of all of the nodes.
 		//cout<<"Remainder: "<<array.getRemaining()<<endl;
 
 	}
@@ -103,7 +101,7 @@ string incode(node *root){
 
 
 int main(){
-	my_da_array<node> weights = readWeights();
+	my_da_array<node*> weights = readWeights();
 	//binaryTree tree = buildTree(weights);
 	node * root = buildTree(weights);
 	incode(root);

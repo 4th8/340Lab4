@@ -19,7 +19,7 @@ class my_da_array{
 		int da_insert(int pos, T element);
 		T get_elem(int index);
 		int get_size();
-		T* find_maxmin(bool b);
+		T find_maxmin(bool b);
 		int is_elem(T index);
 };
 // default constructor
@@ -135,7 +135,7 @@ int my_da_array<T>::get_size(){
 }
 
 template<class T>
-T*  my_da_array<T>::find_maxmin(bool b){
+T my_da_array<T>::find_maxmin(bool b){
 /*	if (b == true){
 		T* max = &arr[0];
 		for(int i=0; i < size; i++){
@@ -147,12 +147,12 @@ T*  my_da_array<T>::find_maxmin(bool b){
 	}
 */
 
-	T * min;
+	T min;
 	double minnum = 2;
 	for(int i=0; i < size; i++){
-		if(minnum > arr[i].getWeight() && !arr[i].getused()){
-			min = &arr[i];
-			minnum = arr[i].getWeight();
+		if(minnum > arr[i]->getWeight() && !arr[i]->getused()){
+			min = arr[i];
+			minnum = arr[i]->getWeight();
 		}
 	}
 	min->use();
