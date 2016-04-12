@@ -2,6 +2,7 @@
 #include "encoder.h"
 #include <sstream> // Needed for stringstream
 #include <stdlib.h>
+#include "keygen.h"
 using namespace std;
 my_da_array<node*> readWeights(){
 	my_da_array<node*> array;
@@ -47,6 +48,7 @@ int main(){
 	encoder encode = encoder();
 	string encoded = encode.incode(root);
 	cout<<encoded<<endl;
+	keygen key = keygen(root);
 	return 0;
 
 }
