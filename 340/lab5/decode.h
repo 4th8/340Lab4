@@ -25,8 +25,10 @@ decoder::decoder(node* root){
 		getline(text, line);
 		incodedString += line+"\n";
 	}
-	return incodedString;
-
+	for(int i = 0; i<incodedString.length(); i++){
+		char c = incodedString[i];
+		genText(c,root);
+	}
 };
 
 void decoder::genText(char c, node* n){
