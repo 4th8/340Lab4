@@ -32,22 +32,25 @@ decoder::decoder(node* root){
 };
 
 void decoder::genText(char c, node* n){
+	cout<<c<<endl;
 	if (n->checkLeaf()){
 		decodedString += n->getVal();
 		pos++;
 	}
-	else if(c == 0){
+	else if(c == char('0')){
+		cout<<"here"<<endl;
 		pos++;
 		c=incodedText[pos];
 		genText(c, n->getLeft());
 	}
-	else if(c == 1){
+	else if(c == char('1')){
 		pos++;
 		c=incodedText[pos];
 		genText(c, n->getRight());
 	}
 	else{
 		cout<<"you messed up"<<endl;
+		pos = 99999999999;
 	}
 };
 
