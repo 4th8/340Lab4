@@ -6,6 +6,7 @@
 #include <string>
 #include <stdlib.h>  
 using namespace std;
+
 template <typename T>
 struct node{
 	T *info;
@@ -87,7 +88,7 @@ class list{
 		}
 		void add(T *content){
 			node<T> *temp = new node<T>;
-	//		cout<<"Here in add."<<endl;
+			cout<<"Here in add."<<endl;
 			temp->info = content;
 			temp->next = NULL;
 			tail = temp;
@@ -97,7 +98,6 @@ class list{
 			size++;
 		}
 		T* getElement(int index){
-	//		cout<<"In get Element get index: "<<index<<endl;
 			cout<<"Size: "<<size<<endl;
 			if (index == 0){
 				return head->info;
@@ -105,7 +105,7 @@ class list{
 				return tail->info;
 			} else{
 				node<T> *current = tail;
-				for(int i=0; i < index; i++){
+				for(int i=1; i < index; i++){
 					current = current->next;
 				}
 				return current->info;
@@ -126,7 +126,12 @@ class team{
 		string name;
 		bool isOut;
 	public:
-		team(){};
+		team(){
+			name = "";
+			numStops = 0;
+			isOut = false;
+			arrivalTimes = new list<int>;
+		};
 
 		team(string n){
 			name = n;
@@ -161,7 +166,7 @@ class team{
 class game{
 	private:
 		int numberOfStops;
-		queue<string> stops;
+		queue<string>* stops;
 		queue<team>* teamTracker;
 		list<team>* teamList;
 		int numberOfTeams;
@@ -172,23 +177,24 @@ class game{
 
 	public:
 		game(){
-			numberOfStops = 0;
-			numberOfTeams = 0;
-			teamList = new list<team>;
-			teamTracker = new queue<team>;
+			//teamList = new list<team>;
+			//teamTracker = new queue<team>;
+			//stops = new queue<string>;
 		}
 		void loadStops(ifstream &file){	
 			string line;
+			numberOfStops = 0;
 			while(file){
 				getline(file, line);
 				string *currentline = new string;
 				*currentline = line;
-				stops.push(currentline);
+				stops->push(currentline);
 				numberOfStops++;
 			}
 		}
 		void loadTeams(ifstream &file){
 			teamList = new list<team>;	
+			numberOfTeams = 0;
 			string line;
 			while(file){
 				getline(file, line);
@@ -196,6 +202,7 @@ class game{
 					team *ptr = new team(line);
 					teamList->add(ptr);
 					numberOfTeams++;
+					cout << "num of teams " << numberOfTeams << endl;
 				}
 			}
 		}
@@ -265,7 +272,7 @@ class game{
 		void printResults(){
 			string city;
 			for(int i =0; i< numberOfStops; i++){
-				cout<<stops.pop();
+				cout<<stops->pop();
 				for(int j=0; j<numberOfTeams; j++){
 					team *team = teamTracker->getTail();
 					cout<< team->getName() << " was the last team to reach " << city << endl;
@@ -287,13 +294,15 @@ class game{
 			cout<<numberOfTeams<<endl;
 			team *curTeam;
 			for(int i = 0; i < numberOfStops; i++){
-				for(int j =1; j< numberOfTeams; j++){
+				for(int j =0; j< numberOfTeams; j++){
+					cout<<"j " << j <<endl;
+					cout<<"i " << i <<endl;
 					curTeam = teamList->getElement(j);
 					cout<<curTeam->getName()<<endl;
 					curTeam->addTimes(generateTime());
 				}					
 				queue<team> thisCity = sort();
-				cout<<"The "<<thisCity.getTail()->getName()<<" was the last to get to "<<stops.pop()<<"."<<endl;
+				cout<<"The "<<thisCity.getTail()->getName()<<" was the last to get to "<<stops->pop()<<"."<<endl;
 				thisCity.getTail()->makeOut();
 			}
 		}
@@ -310,11 +319,13 @@ int main(){
 	ifstream inputTeams;
 	inputTeams.open(filename.c_str(),ios::in);
 	cin.ignore();
-	game theGame;
-	theGame.loadStops(inputCities);
+	game *theGame = new game();;
+	cout <<"made game" << endl;
+	theGame->loadStops(inputCities);
 	cout<<"Load Stops Works"<<endl;
-	theGame.loadTeams(inputTeams);
+	theGame->loadTeams(inputTeams);
 	cout << "ALL LOADED IN" << endl;
-	theGame.run();
+	theGame->run();
+	cout<< "out of run" << endl;
 	return 0;
 }
