@@ -25,8 +25,8 @@ decoder::decoder(node* root){
 		getline(text, line);
 		incodedText += line+"\n";
 	}
-	for(int i = 0; i<incodedText.length(); i++){
-		char c = incodedText[i];
+	while(pos<incodedText.length()){
+		char c = incodedText[pos];
 		genText(c,root);
 	}
 };
@@ -36,15 +36,18 @@ void decoder::genText(char c, node* n){
 		decodedString += n->getVal();
 		pos++;
 	}
-	else if(c == '0'){
+	else if(c == 0){
 		pos++;
 		c=incodedText[pos];
 		genText(c, n->getLeft());
 	}
-	else{
+	else if(c == 1){
 		pos++;
 		c=incodedText[pos];
 		genText(c, n->getRight());
+	}
+	else{
+		cout<<"you messed up"<<endl;
 	}
 };
 

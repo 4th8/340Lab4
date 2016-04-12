@@ -55,6 +55,8 @@ int main(){
 	string key = k.getKey();
 	decoder d = decoder(root);
 	string decoded = d.getText();
+	cout<<decoded<<endl;
+
 	return 0;
 
 }
