@@ -1,3 +1,9 @@
+/*
+Takes a text and the root of the Huffman tree and returns the encoded string.
+For the finial result this will need to print the encoded string to a file.
+*/
+
+
 #include "node.h"
 #include <fstream>
 #include <iostream>
