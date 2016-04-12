@@ -5,15 +5,17 @@ class decoder{
 		string decodedString;
 		int pos;
 		string incodedString;
+		node * root;
 	public:
-		decoder();
+		decoder(node*);
 		void genText(char, node*);
 		string getText();
 };
 
-decoder::decoder(){
+decoder::decoder(node* root){
 	decodedString="";
 	incodedString = "";
+	root = root;
 	pos = 0;
 	ifstream text;
 	text.open("TextFile.txt");// this needs to be overwritten with a prompt.
