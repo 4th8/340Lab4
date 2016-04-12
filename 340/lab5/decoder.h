@@ -18,7 +18,7 @@ decoder::decoder(node* root){
 	root = root;
 	pos = 0;
 	ifstream text;
-	text.open("TextFile.txt");// this needs to be overwritten with a prompt.
+	text.open("coded.txt");// this needs to be overwritten with a prompt.
 	string coded;
 	while(text){
 		string line;
