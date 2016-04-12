@@ -15,8 +15,6 @@ class node{
 
 		node(char x, double w){
 			d = new data(x,w);
-			left = NULL;
-			right = NULL;
 			isLeaf = true;
 			used = false;
 		}

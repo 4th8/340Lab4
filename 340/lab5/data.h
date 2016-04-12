@@ -1,4 +1,4 @@
-class data{
+class data{	
 	public:
 		data(){}
 		data(char c, double w){
