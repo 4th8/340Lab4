@@ -1,0 +1,17 @@
+class keygen(){
+	private:
+		string key;
+		node * root;
+		makeKey();
+	
+	public:
+		keygen(node*);
+};
+keygen::keygen(node* root){
+	using namespace std;
+	root = root;
+	key = "";
+};
+keygen::makeKey(){
+
+};

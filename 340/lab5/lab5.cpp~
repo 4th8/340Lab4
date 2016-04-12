@@ -1,8 +1,10 @@
 #include "my_da_array.cpp"
-#include "encoder.h"
+#include "binaryTree.h"
+#include <fstream>
+#include <iostream>
 #include <sstream> // Needed for stringstream
+#include <string>
 #include <stdlib.h>
-#include "keygen.h"
 using namespace std;
 my_da_array<node*> readWeights(){
 	my_da_array<node*> array;
@@ -41,16 +43,41 @@ node * buildTree(my_da_array<node*> array){ //I think that we might need to deal
 	node * root = array.find_maxmin(false);
 	return root;
 }	
-
+void genCode(char cur, node * root, string coded){// This will generate the code recursively.
+	if(root->checkLeaf() == true){
+		cout<<root->getVal()<<endl;
+		if(root->getVal() == cur){
+			cout<<"Found "<<cur<<"!\nPath: "<<coded<<endl;
+		}
+	}
+	if(root->hasLeft()){
+		genCode(cur,root->getLeft(),coded+"0");
+	}
+	if(root->hasRight()){
+		genCode(cur,root->getRight(),coded+"1");
+	}
+}
+string incode(node *root){
+	ifstream text;
+	text.open("TextFile.txt");// this needs to be overwritten with a prompt.
+	string coded;
+	while(text){
+		string line;
+		getline(text, line);
+		int length = line.length();
+		for(int i = 0; i <length; i++){
+			char currentletter = line[i];
+			cout<<"Current Letter: "<<currentletter<<endl;
+			string coded = "";
+			genCode(currentletter,root,coded);
+		}
+	}
+	return coded;
+}
 int main(){
 	my_da_array<node*> weights = readWeights();
 	node * root = buildTree(weights);
-	encoder encode = encoder();
-	string encoded = encode.incode(root);
-	cout<<encoded<<endl;
-	keygen k = keygen(root);
-	string key = k.getKey();
-
+	incode(root);
 	return 0;
 
 }

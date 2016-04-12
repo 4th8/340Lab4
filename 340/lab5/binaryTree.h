@@ -24,6 +24,7 @@ class binaryTree{
 void binaryTree::reset(){
 	current = head;
 }
+
 char binaryTree::checkLeft(){
 	return current->getLeft()->getVal();
 }
