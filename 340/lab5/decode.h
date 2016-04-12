@@ -4,6 +4,7 @@ class decoder{
 	private:
 		string decodedString;
 		int pos;
+		string incodedString;
 	public:
 		decoder();
 		void genText(char, node*);
@@ -12,6 +13,7 @@ class decoder{
 
 decoder::decoder(){
 	decodedString="";
+	incodedString = "";
 	pos = 0;
 	ifstream text;
 	text.open("TextFile.txt");// this needs to be overwritten with a prompt.
@@ -19,14 +21,9 @@ decoder::decoder(){
 	while(text){
 		string line;
 		getline(text, line);
-		int length = line.length();
-		for(int i = 0; i <length; i++){
-			char currentletter = line[i];
-			string coded = "";
-			genCode(currentletter,root,coded);
-		}
+		incodedString += line+"\n";
 	}
-	return encodedString;
+	return incodedString;
 
 };
 
