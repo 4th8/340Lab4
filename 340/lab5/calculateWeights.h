@@ -1,17 +1,17 @@
 class calculateWeights{
-		struct character{
-			char c;
-			double count;
-		};
+	struct character{
+		char c;
+		double count;
+	};
 	private:
-		int curLen;
-		double total;
-			
-		character * characters;
+	int curLen;
+	double total;
+
+	character * characters;
 	public:
-		calculateWeights();
-		void print();
-		void checkCharacters(char);
+	calculateWeights();
+	void print();
+	void checkCharacters(char);
 };
 calculateWeights::calculateWeights(){
 	curLen = 0;
@@ -19,14 +19,10 @@ calculateWeights::calculateWeights(){
 	characters = new character[127];//One slot for each of the 127 characters in ascii.
 	ifstream text;
 	text.open("InFile.txt");// this needs to be overwritten with a prompt.
-	string coded;
-	while(text){
-		string line;
-		getline(text, line);
-		for(int i = 0; i < line.length(); i++){
-			checkCharacters(line[i]);
-			total++;
-		}
+	char c;
+	while(text.get(c)){
+		checkCharacters(c);	
+		total++;
 	}
 	print();
 };

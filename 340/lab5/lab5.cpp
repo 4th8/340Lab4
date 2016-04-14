@@ -46,15 +46,22 @@ node * buildTree(my_da_array<node*> array){ //I think that we might need to deal
 }	
 
 int main(){
-	//calculateWeights();
+	calculateWeights();
+	cout<<"Done with calculateWeights"<<endl;
 	my_da_array<node*> weights = readWeights();
+	cout<<"Done with readWeights"<<endl;
 	node * root = buildTree(weights);
+	cout<<"Done with buildTree"<<endl;
 	encoder encode = encoder();
-	string encoded = encode.incode(root);
-	cout<<encoded<<endl;
+	cout<<"Done with encoder"<<endl;
 	keygen k = keygen(root);
+	cout<<"Done with keygen"<<endl;
 	string key = k.getKey();
+	string encoded = encode.incode(root);
+	cout<<"Done with incode(root)"<<endl;
+	cout<<encoded<<endl;
 	decoder d = decoder(root);
+	cout<<"Done with decoder"<<endl;
 	string decoded = d.getText();
 	cout<<decoded<<endl;
 	
