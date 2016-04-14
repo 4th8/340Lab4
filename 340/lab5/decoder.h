@@ -46,8 +46,7 @@ void decoder::genText(char c, node* n){
 		c=incodedText[pos];
 		genText(c, n->getRight());
 	}
-	else{
-		cout<<"you messed up"<<endl;
+	else if(c== NULL){
 		pos = 99999;
 	}
 };
