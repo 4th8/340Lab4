@@ -28,20 +28,22 @@ decoder::decoder(node* root){
 	while(pos<=incodedText.length()){
 		char c = incodedText[pos];
 		genText(c,root);
+		pos--;
 	}
 };
 
 void decoder::genText(char c, node* n){
+	pos = pos +1;
 	cout<<c<< endl;
 	if (n->checkLeaf()){
 		decodedString += n->getVal();
 	}
 	else if(c == char('0')){
-		c=incodedText[pos+1];
+		c=incodedText[pos];
 		genText(c, n->getLeft());
 	}
 	else if(c == char('1')){
-		c=incodedText[pos+1];
+		c=incodedText[pos];
 		genText(c, n->getRight());
 	}
 	else{
