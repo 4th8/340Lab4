@@ -1,0 +1,9 @@
+class calculateWeights{
+	private:
+		
+	public:
+		calculateWeights();
+};
+calculateWeights::calculateWeights(){
+	
+};

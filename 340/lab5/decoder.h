@@ -34,7 +34,6 @@ decoder::decoder(node* root){
 
 void decoder::genText(char c, node* n){
 	pos = pos +1;
-	cout<<c<< endl;
 	if (n->checkLeaf()){
 		decodedString += n->getVal();
 	}
@@ -46,7 +45,7 @@ void decoder::genText(char c, node* n){
 		c=incodedText[pos];
 		genText(c, n->getRight());
 	}
-	else if(c== NULL){
+	else{
 		pos = 99999;
 	}
 };

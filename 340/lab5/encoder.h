@@ -18,7 +18,11 @@ class encoder{
 		encoder();
 		void genCode(char, node*, string);
 		string incode(node*);
+<<<<<<< HEAD
 		void writeFile(string);
+=======
+		void stringPrint();
+>>>>>>> 60b9b2165220bbf63fcb758c3b98cd48f087284a
 };
 
 encoder::encoder(){
@@ -51,7 +55,8 @@ string encoder::incode(node *root){
 		for(int i = 0; i <length; i++){
 			char currentletter = line[i];
 			string coded = "";
-			genCode(currentletter,root,coded);
+			genCode(currentletter,root,coded); 
+			stringPrint();//This will be replaced when you get the binary printer working.
 		}
 	}
 	return encodedString;
@@ -64,3 +69,8 @@ void writeFile(string code){
 		binOutput.writeBit(codeArray[i]);
 	}
 };
+void encoder::stringPrint(){
+	ofstream outfile;
+	outfile.open("coded.txt");
+	outfile<<encodedString;
+}
