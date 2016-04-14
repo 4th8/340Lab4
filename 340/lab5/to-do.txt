@@ -1,0 +1,8 @@
+Change everything to prompts.
+have it write to a file where necessary
+need to have it convert to binary
+calculate the weights from a text file
+	write those weight to a Weights.txt
+compute saved space
+be able to build tree from a key
+
