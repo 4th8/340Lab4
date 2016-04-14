@@ -23,34 +23,32 @@ decoder::decoder(node* root){
 	while(text){
 		string line;
 		getline(text, line);
-		incodedText += line+"\n";
+		incodedText += line;
 	}
-	while(pos<incodedText.length()){
+	while(pos<=incodedText.length()){
 		char c = incodedText[pos];
 		genText(c,root);
 	}
 };
 
 void decoder::genText(char c, node* n){
-	cout<<c<<endl;
 	if (n->checkLeaf()){
 		decodedString += n->getVal();
 		pos++;
 	}
 	else if(c == char('0')){
-		cout<<"here"<<endl;
-		pos++;
-		c=incodedText[pos];
-		genText(c, n->getLeft());
-	}
-	else if(c == char('1')){
 		pos++;
 		c=incodedText[pos];
 		genText(c, n->getRight());
 	}
+	else if(c == char('1')){
+		pos++;
+		c=incodedText[pos];
+		genText(c, n->getLeft());
+	}
 	else{
 		cout<<"you messed up"<<endl;
-		pos = 99999999999;
+		pos = 99999;
 	}
 };
 
