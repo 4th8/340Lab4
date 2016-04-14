@@ -50,6 +50,7 @@ int main(){
 	node * root = buildTree(weights);
 	encoder encode = encoder();
 	string encoded = encode.incode(root);
+	writeFile(encoded);
 	cout<<encoded<<endl;
 	keygen k = keygen(root);
 	string key = k.getKey();

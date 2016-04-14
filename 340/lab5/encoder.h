@@ -3,7 +3,7 @@ Takes a text and the root of the Huffman tree and returns the encoded string.
 For the finial result this will need to print the encoded string to a file.
 */
 
-
+#include "bstream.cpp"
 #include "node.h"
 #include <fstream>
 #include <iostream>
@@ -18,6 +18,7 @@ class encoder{
 		encoder();
 		void genCode(char, node*, string);
 		string incode(node*);
+		void writeFile(string);
 };
 
 encoder::encoder(){
@@ -55,4 +56,11 @@ string encoder::incode(node *root){
 	}
 	return encodedString;
 };
-
+void writeFile(string code){
+	const char* codeArray = code.c_str();
+	ofbstream binOutput;
+	binOutput.open("filename.hzip");
+	for(int i=0; i<strlen(codeArray); i++){
+		binOutput.writeBit(codeArray[i]);
+	}
+};
