@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "keygen.h"
 #include "decoder.h"
-
+#include "calculateWeights.h"
 using namespace std;
 
 my_da_array<node*> readWeights(){
@@ -46,6 +46,7 @@ node * buildTree(my_da_array<node*> array){ //I think that we might need to deal
 }	
 
 int main(){
+	//calculateWeights();
 	my_da_array<node*> weights = readWeights();
 	node * root = buildTree(weights);
 	encoder encode = encoder();
@@ -56,7 +57,7 @@ int main(){
 	decoder d = decoder(root);
 	string decoded = d.getText();
 	cout<<decoded<<endl;
-
+	
 	return 0;
 
 }

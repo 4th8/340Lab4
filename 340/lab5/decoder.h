@@ -46,7 +46,7 @@ void decoder::genText(char c, node* n){
 		c=incodedText[pos];
 		genText(c, n->getRight());
 	}
-	else if(c== NULL){
+	else{
 		pos = 99999;
 	}
 };
