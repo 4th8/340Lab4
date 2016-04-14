@@ -18,6 +18,7 @@ class encoder{
 		encoder();
 		void genCode(char, node*, string);
 		string incode(node*);
+		void stringPrint();
 };
 
 encoder::encoder(){
@@ -50,9 +51,14 @@ string encoder::incode(node *root){
 		for(int i = 0; i <length; i++){
 			char currentletter = line[i];
 			string coded = "";
-			genCode(currentletter,root,coded);
+			genCode(currentletter,root,coded); 
+			stringPrint();//This will be replaced when you get the binary printer working.
 		}
 	}
 	return encodedString;
 };
-
+void encoder::stringPrint(){
+	ofstream outfile;
+	outfile.open("coded.txt");
+	outfile<<encodedString;
+}
